@@ -72,7 +72,7 @@ public class MainView extends JFrame {
         btnCustomerList.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                MemberAddInterView.main();
             }
         });
         btnCustomerList.setBounds(6, 150, 145, 29);

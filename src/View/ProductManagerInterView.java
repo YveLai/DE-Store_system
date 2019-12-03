@@ -9,6 +9,7 @@ import javax.swing.*;
 import javax.swing.GroupLayout;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -110,19 +111,14 @@ public class ProductManagerInterView extends JInternalFrame {
             }
         });
         table.setModel(new DefaultTableModel(
-                new Object[][]{
-                },
-                new String[]{
-                        "ID", "Name", "Price", "Stock", "Notes"
-                }
-        ){
-            boolean[] columnEditables = new boolean[]{
-                    false, false, false, false, false
-            };
-            public boolean isCellEditable(int row, int column){
-                return columnEditables[column];
-            }
+                new Object[][]{},
+                new String[]{"ID", "Name", "Price", "Stock", "Notes"}
+        )
+        {
+            boolean[] columnEditables = new boolean[]{false, false, false, false, false};
+            public boolean isCellEditable(int row, int column){ return columnEditables[column]; }
         });
+        JTableHeader head = table.getTableHeader();
         table.getColumnModel().getColumn(0);
         table.getColumnModel().getColumn(1);
         scrollpane.setViewportView(table);
@@ -136,6 +132,7 @@ public class ProductManagerInterView extends JInternalFrame {
         frame.getContentPane().add(lblProductId);
 
         product_ID = new JTextField();
+        product_ID.setEditable(false);
         product_ID.setBounds(104, 214, 79, 26);
         frame.getContentPane().add(product_ID);
         product_ID.setColumns(10);
@@ -207,6 +204,7 @@ public class ProductManagerInterView extends JInternalFrame {
         frame.getContentPane().add(btnClear);
 
         JPanel panel = new JPanel();
+        panel.setBorder(new TitledBorder(null,"Form Operation",TitledBorder.LEADING,TitledBorder.TOP,null,null));
         panel.setBounds(6, 197, 438, 225);
         frame.getContentPane().add(panel);
     }

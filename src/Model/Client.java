@@ -28,6 +28,30 @@ public class Client {
         this.loyalty_card = loyalty_card;
     }
 
+    public Client( String client_name, String DOB, String gender,
+                  String phone_num, String line1, String line2, String town,
+                  String postcode, String loyalty_card){
+        super();
+        this.client_name = client_name;
+        this.DOB = DOB;
+        this.gender = gender;
+        this.phone_num = phone_num;
+        this.line1 = line1;
+        this.line2 = line2;
+        this.town = town;
+        this.postcode = postcode;
+        this.loyalty_card = loyalty_card;
+    }
+
+    public Client(int client_id) {
+        super();
+        this.client_id = client_id;
+    }
+
+    public Client(){
+
+    }
+
     public int getClient_id() {return client_id;}
 
     public void setClient_id(int client_id) {this.client_id = client_id;}
