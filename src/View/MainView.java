@@ -42,7 +42,9 @@ public class MainView extends JFrame {
         frame.setBounds(100, 100, 450, 300);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
-
+        /**
+         * add product
+         */
         JButton btnAddProducts = new JButton("Add Products");
         btnAddProducts.addActionListener(new ActionListener() {
             @Override
@@ -50,17 +52,43 @@ public class MainView extends JFrame {
                 ProductAddInterView.main();
             }
         });
-        btnAddProducts.setBounds(40, 102, 145, 29);
+        btnAddProducts.setBounds(6, 50, 145, 29);
         frame.getContentPane().add(btnAddProducts);
-
+        /**
+         * button manage product
+         */
         JButton btnManageProducts = new JButton("Manage Products");
         btnManageProducts.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 ProductManagerInterView.main();
             }
         });
-        btnManageProducts.setBounds(260, 102, 151, 29);
+        btnManageProducts.setBounds(6, 100, 145, 29);
         frame.getContentPane().add(btnManageProducts);
+        /**
+         * button customer list
+         */
+        JButton btnCustomerList = new JButton("Manager members");
+        btnCustomerList.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        btnCustomerList.setBounds(6, 150, 145, 29);
+        frame.getContentPane().add(btnCustomerList);
+        /**
+         * button shopping records
+         */
+        JButton btnShoppingRecord = new JButton("Shopping Record");
+        btnShoppingRecord.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        btnShoppingRecord.setBounds(6, 200, 145, 29);
+        frame.getContentPane().add(btnShoppingRecord);
     }
 }
 
