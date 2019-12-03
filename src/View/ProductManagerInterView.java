@@ -28,6 +28,7 @@ public class ProductManagerInterView extends JInternalFrame {
     private JTextField product_price;
     private JTextField product_stock;
     private JTextField notes;
+    private JTextField s_product_stock;
     JScrollPane scrollpane = new JScrollPane();
     private static database_conn database = new database_conn();
     private static ProductDao productDao = new ProductDao();
@@ -80,15 +81,25 @@ public class ProductManagerInterView extends JInternalFrame {
                 searchbookTypeActionPerformed(e);
             }
         });
-        btnSearch.setBounds(261, 16, 79, 29);
+        btnSearch.setBounds(283, 16, 79, 29);
         frame.getContentPane().add(btnSearch);
+
+        JLabel lblProductStock_1 = new JLabel("Product Stock");
+        lblProductStock_1.setBounds(6, 46, 101, 16);
+        frame.getContentPane().add(lblProductStock_1);
+
+        s_product_stock = new JTextField();
+        s_product_stock.setBounds(119, 41, 130, 26);
+        frame.getContentPane().add(s_product_stock);
+        s_product_stock.setColumns(10);
 
         JButton btnLowStock = new JButton("Low Stock");
         btnLowStock.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                searchStockActionPerformed(e);
             }
         });
-        btnLowStock.setBounds(343, 16, 101, 29);
+        btnLowStock.setBounds(283, 41, 101, 29);
         frame.getContentPane().add(btnLowStock);
 
         table = new JTable();
@@ -106,7 +117,7 @@ public class ProductManagerInterView extends JInternalFrame {
                 }
         ){
             boolean[] columnEditables = new boolean[]{
-                    false,false,false,false,false
+                    false, false, false, false, false
             };
             public boolean isCellEditable(int row, int column){
                 return columnEditables[column];
@@ -117,7 +128,7 @@ public class ProductManagerInterView extends JInternalFrame {
         scrollpane.setViewportView(table);
         getContentPane().setLayout(groupLayout);
         this.fillProductTable(new Product());
-        table.setBounds(6, 49, 438, 103);
+        table.setBounds(6, 82, 438, 103);
         frame.getContentPane().add(table);
 
         JLabel lblProductId = new JLabel("Product ID");
@@ -281,6 +292,12 @@ public class ProductManagerInterView extends JInternalFrame {
         this.fillProductTable(product);
     }
 
+    private void searchStockActionPerformed(ActionEvent e){
+        String product_num = s_product_stock.getText();
+        Product product = new Product(product_num);
+        this.fillProductStockTable(product);
+    }
+
     private void productResetActionPerformed(ActionEvent e) {
         // TODO Auto-generated method stub
         this.resetValue();
@@ -314,8 +331,8 @@ public class ProductManagerInterView extends JInternalFrame {
                 Vector v = new Vector();
                 v.add(rs.getString("product_id"));
                 v.add(rs.getString("product_name"));
-                v.add(rs.getString("product_price"));
                 v.add(rs.getString("product_num"));
+                v.add(rs.getString("product_price"));
                 v.add(rs.getString("notes"));
                 dtm.addRow(v);
             }
@@ -325,6 +342,31 @@ public class ProductManagerInterView extends JInternalFrame {
             e.printStackTrace();
         }finally{
             database_conn.close(conn, rs);
+        }
+    }
+    private void fillProductStockTable(Product product){
+        DefaultTableModel dtm = (DefaultTableModel)table.getModel();
+        dtm.setRowCount(0);
+        Connection conn = null;
+        ResultSet rs = null;
+        try{
+            conn = database_conn.getCon();
+            rs = productDao.QueryStock(conn, product);
+            while(rs.next()){
+                Vector v = new Vector();
+                v.add(rs.getString("product_id"));
+                v.add(rs.getString("product_name"));
+                v.add(rs.getString("product_num"));
+                v.add(rs.getString("product_price"));
+                v.add(rs.getString("notes"));
+                dtm.addRow(v);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            {
+                database_conn.close(conn, rs);
+            }
         }
     }
 }

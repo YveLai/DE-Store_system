@@ -1,12 +1,15 @@
 package Dao;
 
 import Controller.StringUtil;
+import Controller.database_conn;
 import Model.Product;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProductDao {
     /**
@@ -39,6 +42,15 @@ public class ProductDao {
         pstmt.setInt(5, product.getProduct_id());
         return pstmt.executeUpdate();
     }
+
+    public static ResultSet QueryStock(Connection conn, Product product) throws Exception{
+        StringBuffer sb = new StringBuffer("select * from Product");
+        if(StringUtil.isNotEmpty(product.getProduct_num())){
+            sb.append(" and product_num <= 200");
+        }
+        PreparedStatement pstmt = conn.prepareStatement(sb.toString().replaceFirst("and","where"));
+        return pstmt.executeQuery();
+    }
     /**
      * Query the product
      * @param conn
@@ -54,7 +66,6 @@ public class ProductDao {
         PreparedStatement pstmt = conn.prepareStatement(sb.toString().replaceFirst("and", "where"));
         return pstmt.executeQuery();
     }
-
     /**
      * add the product
      * @param conn
