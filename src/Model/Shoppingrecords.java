@@ -1,24 +1,35 @@
 package Model;
 
+import java.awt.*;
+
 public class Shoppingrecords {
     private int id;
     private String payer;
-    private String age;
+    private String dob;
     private String gender;
     private String product;
     private String price;
     private String Enabling;
 
-    public Shoppingrecords(int id, String payer, String age, String gender,
+    public Shoppingrecords(int id, String payer, String dob, String gender,
                            String product, String price, String Enabling) {
         super();
         this.id = id;
         this.payer = payer;
-        this.age = age;
+        this.dob = dob;
         this.gender = gender;
         this.product = product;
         this.price = price;
         this.Enabling = Enabling;
+    }
+
+    public Shoppingrecords(int id){
+        super();
+        this.id = id;
+    }
+
+    public Shoppingrecords(){
+        super();
     }
 
     public int getId() {
@@ -37,12 +48,12 @@ public class Shoppingrecords {
         this.payer = payer;
     }
 
-    public String getAge() {
-        return age;
+    public String getDOB() {
+        return dob;
     }
 
-    public void setAge(String age) {
-        this.age = age;
+    public void setDOB(String dob) {
+        this.dob = dob;
     }
 
     public String getGender() {
@@ -79,7 +90,7 @@ public class Shoppingrecords {
 
     public String toString() {
         String m = "Payer:" + payer + "\t"
-                + "Age:" + age + "\t"
+                + "Age:" + dob + "\t"
                 + "Gender" + gender + "\t"
                 + "Product name: " + product + "\t"
                 + "Price:" + price + "\t"

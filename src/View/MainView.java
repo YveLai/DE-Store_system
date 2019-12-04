@@ -84,7 +84,7 @@ public class MainView extends JFrame {
         btnShoppingRecord.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                ShoppingRecordView.main();
             }
         });
         btnShoppingRecord.setBounds(6, 200, 145, 29);
