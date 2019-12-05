@@ -122,7 +122,7 @@ public class Login {
                 JOptionPane.showMessageDialog(null, "Login successful!");
                 MainView.main();
             }else{
-                JOptionPane.showMessageDialog(null, "Login fail!");
+                JOptionPane.showMessageDialog(null, "Login fail, the username or password is wrong!");
             }
 
         } catch (Exception e) {

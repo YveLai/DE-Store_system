@@ -82,7 +82,7 @@ public class ProductManagerInterView extends JInternalFrame {
                 searchbookTypeActionPerformed(e);
             }
         });
-        btnSearch.setBounds(283, 16, 79, 29);
+        btnSearch.setBounds(246, 16, 79, 29);
         frame.getContentPane().add(btnSearch);
 
         JLabel lblProductStock_1 = new JLabel("Product Stock");
@@ -100,8 +100,18 @@ public class ProductManagerInterView extends JInternalFrame {
                 searchStockActionPerformed(e);
             }
         });
-        btnLowStock.setBounds(283, 41, 101, 29);
+        btnLowStock.setBounds(246, 41, 92, 29);
         frame.getContentPane().add(btnLowStock);
+
+        JButton btnOrder = new JButton("Order product");
+        btnOrder.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                OrderInterView.main();
+            }
+        });
+        btnOrder.setBounds(327, 41, 117, 29);
+        frame.getContentPane().add(btnOrder);
 
         table = new JTable();
         table.addMouseListener(new MouseAdapter() {
@@ -293,7 +303,7 @@ public class ProductManagerInterView extends JInternalFrame {
     private void searchStockActionPerformed(ActionEvent e){
         String product_num = s_product_stock.getText();
         Product product = new Product(product_num);
-        this.fillProductStockTable(product);
+        //this.fillProductStockTable(product);
     }
 
     private void productResetActionPerformed(ActionEvent e) {
@@ -342,29 +352,29 @@ public class ProductManagerInterView extends JInternalFrame {
             database_conn.close(conn, rs);
         }
     }
-    private void fillProductStockTable(Product product){
-        DefaultTableModel dtm = (DefaultTableModel)table.getModel();
-        dtm.setRowCount(0);
-        Connection conn = null;
-        ResultSet rs = null;
-        try{
-            conn = database_conn.getCon();
-            rs = productDao.QueryStock(conn, product);
-            while(rs.next()){
-                Vector v = new Vector();
-                v.add(rs.getString("product_id"));
-                v.add(rs.getString("product_name"));
-                v.add(rs.getString("product_num"));
-                v.add(rs.getString("product_price"));
-                v.add(rs.getString("notes"));
-                dtm.addRow(v);
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }finally {
-            {
-                database_conn.close(conn, rs);
-            }
-        }
-    }
+    //private void fillProductStockTable(Product product){
+        //DefaultTableModel dtm = (DefaultTableModel)table.getModel();
+        //dtm.setRowCount(0);
+        //Connection conn = null;
+        //ResultSet rs = null;
+        //try{
+            //conn = database_conn.getCon();
+            //rs = productDao.QueryStock(conn, product);
+            //while(rs.next()){
+               // Vector v = new Vector();
+               // v.add(rs.getString("product_id"));
+               // v.add(rs.getString("product_name"));
+               // v.add(rs.getString("product_num"));
+               // v.add(rs.getString("product_price"));
+               // v.add(rs.getString("notes"));
+               // dtm.addRow(v);
+           // }
+       // }catch (Exception e){
+         //   e.printStackTrace();
+       // }finally {
+         //   {
+           //     database_conn.close(conn, rs);
+          //  }
+     //   }
+    //}
 }

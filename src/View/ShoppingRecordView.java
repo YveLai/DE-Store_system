@@ -65,8 +65,6 @@ public class ShoppingRecordView {
             }
         };
         table.setModel(tableModel);
-
-        //scrollPane.setViewportView(table);
         table.setBounds(6, 6, 344, 266);
         frame.getContentPane().add(table);
 
